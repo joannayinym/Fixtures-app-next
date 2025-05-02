@@ -45,7 +45,9 @@ export async function POST(req: NextRequest) {
         })
         .on("end", async () => {
           for (const item of temp) {
-            const exists = await Fixture.exists(item);
+            const exists = await Fixture.exists({
+              fixtureMid: item.fixtureMid,
+            });
             if (!exists) {
               results.push(item);
             }
