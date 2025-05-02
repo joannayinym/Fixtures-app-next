@@ -2,17 +2,20 @@
 import { useRef, useState } from "react";
 import { ApiResponse } from "../types/ApiResponseType";
 import Link from "next/link";
+import LayoutBackground from "../components/LayoutBackground";
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [fileName, setFileName] = useState<string>("");
+  const [rowCount, setRowCount] = useState<number>(0);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
     fileInputRef.current?.click();
     setMessage("");
+    setRowCount(0);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +43,8 @@ export default function UploadPage() {
 
       const data: ApiResponse = await res.json();
       if (data?.count && data.count > 0) {
-        setMessage(data.message || data.error || "Unknown error");
+        setRowCount(data.count);
+        setMessage(data.message + `, ${data.count} records inserted.`);
       } else {
         setMessage("Duplicate data or no data found in the uploaded file.");
       }
@@ -57,9 +61,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="relative flex flex-col items-baseline pl-8 h-screen">
-      <div className="absolute inset-0 bg-[url('/bg.jpg')] bg-cover bg-center -z-10" />
-      <div className="absolute inset-0 bg-black opacity-30 -z-10" />
+    <LayoutBackground>
       <div className="py-6 font-bold text-black">
         <Link href={"/"} className="underline text-black hover:text-blue-800">
           Home
@@ -94,7 +96,17 @@ export default function UploadPage() {
           Upload
         </button>
       </div>
-      <div>{message && <p className="mt-4 text-red-600 ">{message}</p>}</div>
-    </div>
+      <div>
+        {message && (
+          <p
+            className={`mt-4 font-bold ${
+              rowCount <= 0 ? "text-red-600" : "text-green-900"
+            } `}
+          >
+            {message}
+          </p>
+        )}
+      </div>
+    </LayoutBackground>
   );
 }

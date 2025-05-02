@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FixtureOutput } from "../types/FixtureTypes";
 import dayjs from "dayjs";
+import LayoutBackground from "../components/LayoutBackground";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -30,7 +31,7 @@ export default function SearchPage() {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat bg-fixed p-4">
+    <LayoutBackground>
       <div className="pb-6 text-black">
         <Link href={"/"} className="underline text-black hover:text-blue-800">
           Home
@@ -59,6 +60,6 @@ export default function SearchPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </LayoutBackground>
   );
 }

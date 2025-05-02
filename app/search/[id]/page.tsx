@@ -2,6 +2,7 @@ import { FixtureType } from "@/app/types/FixtureTypes";
 import { notFound } from "next/navigation";
 import dayjs from "dayjs";
 import Link from "next/link";
+import LayoutBackground from "@/app/components/LayoutBackground";
 
 async function getFixture(id: string): Promise<FixtureType | null> {
   try {
@@ -34,7 +35,7 @@ export default async function FixtureDetail({
   }
 
   return (
-    <div className="min-h-screen bg-[url('/bg.jpg')] bg-cover bg-center bg-no-repeat bg-fixed p-4">
+    <LayoutBackground>
       <div className="pb-6 text-black font-bold">
         <Link
           href={"/"}
@@ -104,6 +105,6 @@ export default async function FixtureDetail({
           </tr>
         </tbody>
       </table>
-    </div>
+    </LayoutBackground>
   );
 }
