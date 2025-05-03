@@ -1,8 +1,8 @@
 import { FixtureType } from "@/app/types/FixtureTypes";
 import { notFound } from "next/navigation";
 import dayjs from "dayjs";
-import Link from "next/link";
 import LayoutBackground from "@/app/components/LayoutBackground";
+import HomeLink from "@/app/components/HomeLink";
 
 async function getFixture(id: string): Promise<FixtureType | null> {
   try {
@@ -36,20 +36,7 @@ export default async function FixtureDetail({
 
   return (
     <LayoutBackground>
-      <div className="pb-6 text-black font-bold">
-        <Link
-          href={"/"}
-          className="underline text-black hover:text-blue-800 mr-6"
-        >
-          Home
-        </Link>
-        <Link
-          href={"/search"}
-          className="underline text-black hover:text-blue-800"
-        >
-          Back to Search
-        </Link>
-      </div>
+      <HomeLink showSearch={true} />
       <h1 className="text-xl font-bold mb-2 text-black">Fixture Details</h1>
 
       <table className="table-auto border border-gray-300 text-left text-black mb-4">

@@ -11,6 +11,10 @@ export async function GET(request: Request) {
     await getDBConnection();
     const fixtures = await Fixture.find<FixtureType>({
       $or: [
+        { season: { $regex: query, $options: "i" } },
+        { competitionName: { $regex: query, $options: "i" } },
+        { fixtureDatetime: { $regex: query, $options: "i" } },
+        { fixtureRound: { $regex: query, $options: "i" } },
         { homeTeam: { $regex: query, $options: "i" } },
         { awayTeam: { $regex: query, $options: "i" } },
       ],

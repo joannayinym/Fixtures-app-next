@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import { ApiResponse } from "../types/ApiResponseType";
-import Link from "next/link";
 import LayoutBackground from "../components/LayoutBackground";
+import HomeLink from "../components/HomeLink";
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -62,14 +62,10 @@ export default function UploadPage() {
 
   return (
     <LayoutBackground>
-      <div className="py-6 font-bold text-black">
-        <Link href={"/"} className="underline text-black hover:text-blue-800">
-          Home
-        </Link>
-      </div>
+      <HomeLink showSearch={false} />
       <h1 className="text-xl font-bold mb-4  text-black">Upload CSV File</h1>
       <div className="flex flex-col  justify-center items-baseline text-black">
-        <div className="flex flex-row items-start gap-4 py-6">
+        <div className="flex flex-row items-center gap-4 py-6">
           <input
             type="file"
             accept=".csv"
@@ -80,7 +76,7 @@ export default function UploadPage() {
 
           <button
             onClick={handleClick}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 hover:cursor-pointer"
           >
             Select CSV File
           </button>
@@ -90,7 +86,7 @@ export default function UploadPage() {
 
         <button
           onClick={handleUpload}
-          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-white rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
           disabled={!fileName || loading}
         >
           Upload
@@ -99,7 +95,7 @@ export default function UploadPage() {
       <div>
         {message && (
           <p
-            className={`mt-4 font-bold ${
+            className={`mt-4 text-xl font-semibold ${
               rowCount <= 0 ? "text-red-600" : "text-green-900"
             } `}
           >

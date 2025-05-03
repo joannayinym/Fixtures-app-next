@@ -2,8 +2,8 @@ export type FixtureType = {
   fixtureMid: string;
   season: string;
   competitionName: string;
-  fixtureDatetime: Date;
-  fixtureRound: number;
+  fixtureDatetime: string;
+  fixtureRound: string;
   homeTeam: string;
   awayTeam: string;
 };

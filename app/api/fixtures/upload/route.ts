@@ -37,8 +37,8 @@ export async function POST(req: NextRequest) {
             fixtureMid: row.fixture_mid,
             season: row.season,
             competitionName: row.competition_name,
-            fixtureDatetime: new Date(row.fixture_datetime),
-            fixtureRound: parseInt(row.fixture_round, 10),
+            fixtureDatetime: row.fixture_datetime,
+            fixtureRound: row.fixture_round,
             homeTeam: row.home_team,
             awayTeam: row.away_team,
           });
